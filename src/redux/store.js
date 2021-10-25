@@ -1,34 +1,10 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-// import logger from 'redux-logger';
-import {
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from "redux-persist";
-import { todosReducer } from "./todos";
-import counterReducer from "./counter";
+import { configureStore } from "@reduxjs/toolkit";
+import { booksReducer } from "./books/booksSlice";
+import { authorsReducer } from "./authors/authorsSlice";
 
-const middleware = [
-  ...getDefaultMiddleware({
-    serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-    },
-  }),
-  // logger,
-];
-
-const store = configureStore({
+export const store = configureStore({
   reducer: {
-    todos: todosReducer,
-    counter: counterReducer,
+    books: booksReducer,
+    authors: authorsReducer,
   },
-  middleware,
-  devTools: process.env.NODE_ENV === "development",
 });
-
-// const persistor = persistStore(store);
-
-export default store;
